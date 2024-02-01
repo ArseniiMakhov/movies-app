@@ -16,11 +16,22 @@ export default class moviesService {
     }
     return await res.json()
   }
+
   async getQueryMovies(query) {
     const res = await this.getResource(
       `https://api.themoviedb.org/3/search/movie?query=${query}&include_adult=false&language=en-US`,
       this.options
     )
-    return res.results
+    return res.results.map(this.transformData)
+  }
+
+  transformData(item) {
+    return {
+      id: item.id,
+      title: item.original_title,
+      release: item.release_date,
+      overview: item.overview,
+      poster: item.poster_path,
+    }
   }
 }
