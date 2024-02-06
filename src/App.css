@@ -49,3 +49,13 @@ body {
 .card-description {
   color: #000;
 }
+
+.film-input {
+  padding: 36px 36px 0 36px;
+}
+
+.list-warning {
+  text-align: center;
+  width: 50%;
+  margin: 20px auto;
+}

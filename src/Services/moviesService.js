@@ -17,12 +17,14 @@ export default class moviesService {
     return await res.json()
   }
 
-  async getQueryMovies(query) {
+  async getQueryMovies(query = '', page = 1) {
     const res = await this.getResource(
-      `https://api.themoviedb.org/3/search/movie?query=${query}&include_adult=false&language=en-US`,
+      `https://api.themoviedb.org/3/search/movie?query=${query}&include_adult=false&language=en-US&page=${page}`,
       this.options
     )
-    return res.results.map(this.transformData)
+    const items = res.results.map(this.transformData)
+    const total = res.total_pages
+    return { items, total }
   }
 
   transformData(item) {

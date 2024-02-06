@@ -5,30 +5,29 @@ import { Alert } from 'antd'
 import moviesService from '../../Services/moviesService'
 import '../../App.css'
 import FilmList from '../FilmList/FilmList'
+import FilmInput from '../FilmInput/FilmInput'
 
 export default class App extends Component {
   moviesService = new moviesService()
 
   state = {
-    movies: [],
-    loading: true,
+    movies: null,
+    loading: null,
     errorIndicator: false,
+    query: '',
+    total: null,
   }
 
-  constructor() {
-    super()
-    this.getMovies()
-  }
-
-  onError() {
+  onError = () => {
     this.setState({ errorIndicator: true })
   }
 
-  getMovies() {
+  getMovies = (query, page) => {
+    this.setState({ loading: true })
     this.moviesService
-      .getQueryMovies('return')
-      .then((body) => {
-        this.setState({ movies: body, loading: false })
+      .getQueryMovies(query, page)
+      .then((data) => {
+        this.setState({ movies: data.items, loading: false, query: query, total: data.total })
       })
       .catch(this.onError)
   }
@@ -37,10 +36,14 @@ export default class App extends Component {
     return (
       <>
         <Online>
+          <FilmInput getMovies={this.getMovies} />
           <FilmList
             movies={this.state.movies}
             loading={this.state.loading}
             errorIndicator={this.state.errorIndicator}
+            onPagination={this.getMovies}
+            query={this.state.query}
+            total={this.state.total}
           />
         </Online>
         <Offline>
