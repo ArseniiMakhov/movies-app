@@ -13,7 +13,7 @@ export default class FilmInput extends Component {
 
   componentDidUpdate = debounce((prevProps, prevState) => {
     if (this.state.label !== prevState.label) {
-      this.props.getMovies(this.state.label)
+      this.props.getMovies(this.state.label, 1)
     }
   }, 1000)
 

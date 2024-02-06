@@ -6,7 +6,7 @@ const { Meta } = Card
 
 export default class FilmList extends Component {
   render() {
-    const { movies, loading, errorIndicator, onPagination, query, total } = this.props
+    const { movies, loading, errorIndicator, onPagination, query, total, pageNum } = this.props
 
     function shorten(str, maxLen = 250, separator = ' ') {
       if (str.length <= maxLen) return str
@@ -41,6 +41,8 @@ export default class FilmList extends Component {
           pageSize: 20,
           total: total,
           showSizeChanger: false,
+          showTitle: false,
+          current: pageNum,
           onChange: (page) => onPagination(query, page),
         }}
         renderItem={(item) => (

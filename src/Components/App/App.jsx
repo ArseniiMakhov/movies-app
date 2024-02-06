@@ -16,6 +16,7 @@ export default class App extends Component {
     errorIndicator: false,
     query: '',
     total: null,
+    pageNum: null,
   }
 
   onError = () => {
@@ -27,7 +28,7 @@ export default class App extends Component {
     this.moviesService
       .getQueryMovies(query, page)
       .then((data) => {
-        this.setState({ movies: data.items, loading: false, query: query, total: data.total })
+        this.setState({ movies: data.items, loading: false, query, total: data.total, pageNum: page })
       })
       .catch(this.onError)
   }
@@ -44,6 +45,7 @@ export default class App extends Component {
             onPagination={this.getMovies}
             query={this.state.query}
             total={this.state.total}
+            pageNum={this.state.pageNum}
           />
         </Online>
         <Offline>
