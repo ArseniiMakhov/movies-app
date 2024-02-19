@@ -1,18 +1,14 @@
 import { Component } from 'react'
-import { List, Spin, Alert } from 'antd'
+import { List, Alert, Spin } from 'antd'
 
 import FilmCard from '../FilmCard/FilmCard'
 
-export default class FilmList extends Component {
+export default class RatedPage extends Component {
   render() {
-    const { movies, loading, errorIndicator, onPagination, query, total, pageNum, setRate } = this.props
+    const { movies, errorIndicator, onPagination, totalRated, pageNum, loading, setRate } = this.props
 
-    if (query === '') {
-      return
-    }
-
-    if (movies.length === 0 && query !== '') {
-      return <Alert className="list-warning" message="No results" description="Try again" type="warning" />
+    if (movies.length === 0) {
+      return <Alert className="list-warning" message="There's no rated movies" type="warning" />
     }
 
     if (errorIndicator) {
@@ -33,11 +29,11 @@ export default class FilmList extends Component {
           position: 'bottom',
           align: 'center',
           pageSize: 20,
-          total: total,
+          total: totalRated,
           showSizeChanger: false,
           showTitle: false,
           current: pageNum,
-          onChange: (page) => onPagination(page, query),
+          onChange: (page) => onPagination(page),
         }}
         renderItem={(item) => (
           <List.Item className="movies-item" style={{ padding: 0, marginBlockEnd: 36 }}>

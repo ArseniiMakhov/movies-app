@@ -20,11 +20,25 @@ body {
 
 .item-card {
   display: flex;
+  position: relative;
   border-radius: 0;
 }
 
 .card-title {
-  font-size: 20px;
+  font-size: 18px;
+  max-width: 80%;
+  overflow: hidden;
+}
+
+.card-rating {
+  position: absolute;
+  top: 18px;
+  right: 24px;
+  width: 35px;
+  height: 35px;
+  line-height: 30px;
+  text-align: center;
+  border-radius: 50%;
 }
 
 .card-date {
@@ -40,6 +54,7 @@ body {
   font-size: 12px;
   line-height: 12px;
   padding: 2px 5px;
+  margin-right: 2px;
 }
 
 .genres-item > span {
@@ -50,8 +65,13 @@ body {
   color: #000;
 }
 
+.card-stars {
+  position: absolute;
+  bottom: 24px;
+}
+
 .film-input {
-  padding: 36px 36px 0 36px;
+  padding: 0 36px;
 }
 
 .list-warning {
