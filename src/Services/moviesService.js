@@ -1,14 +1,14 @@
 export default class moviesService {
-  _APIKey = '81e8e445d64588a7d995b8ce95ec23dd'
+  _APIKey = 'Bearer 81e8e445d64588a7d995b8ce95ec23dd'
   _APIToken =
-    'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4MWU4ZTQ0NWQ2NDU4OGE3ZDk5NWI4Y2U5NWVjMjNkZCIsInN1YiI6IjY1YWJmNTE2NTk0Yzk0MDExMzhhZDE1NCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.Pj49ffaIjIoxmj16w3s1rYDXi1hNSZX6RRPC9pIwrA0'
+    'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4MWU4ZTQ0NWQ2NDU4OGE3ZDk5NWI4Y2U5NWVjMjNkZCIsInN1YiI6IjY1YWJmNTE2NTk0Yzk0MDExMzhhZDE1NCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.Pj49ffaIjIoxmj16w3s1rYDXi1hNSZX6RRPC9pIwrA0'
 
   options = {
     get: {
       method: 'GET',
       headers: {
         accept: 'application/json',
-        Authorization: `Bearer ${this._APIToken}`,
+        Authorization: this._APIToken,
       },
     },
     guestGet: {
