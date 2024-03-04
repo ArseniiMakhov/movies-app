@@ -83,7 +83,7 @@ export default class App extends Component {
     const props = this.state
     return (
       <>
-        <Online polling={{ enabled: true, interval: 60000 }}>
+        <Online>
           <GenresProvider value={props}>
             <Tabs
               defaultActiveKey="1"
