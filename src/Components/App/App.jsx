@@ -89,7 +89,6 @@ export default class App extends Component {
             <Tabs
               defaultActiveKey="1"
               indicator={{ size: 70 }}
-              // destroyInactiveTabPane={true}
               centered={true}
               onTabClick={(key) => {
                 if (key === '2') {

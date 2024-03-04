@@ -40,8 +40,8 @@ export default class moviesService {
 
   getQueryMovies = async (page = 1, query = '') => {
     const res = await this.getResource(
-      `https://api.themoviedb.org/3/search/movie?query=${query}&include_adult=false&language=en-US&page=${page}`,
-      this.options.get
+      `https://api.themoviedb.org/3/search/movie?api_key=${this._APIKey}&query=${query}&include_adult=false&language=en-US&page=${page}`,
+      this.options.guestGet
     )
     const items = res.results.map(this.transformData)
     const total = res.total_pages * 20
@@ -59,7 +59,10 @@ export default class moviesService {
   }
 
   async getGenres() {
-    const res = await this.getResource('https://api.themoviedb.org/3/genre/movie/list?language=en', this.options.get)
+    const res = await this.getResource(
+      `https://api.themoviedb.org/3/genre/movie/list?api_key=${this._APIKey}&language=en`,
+      this.options.guestGet
+    )
     return res.genres
   }
 
