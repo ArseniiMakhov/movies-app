@@ -21,7 +21,7 @@ export default class App extends Component {
     this.moviesService
       .createGuestSession()
       .then((sessionID) => {
-        localStorage.setItem('sessionID', sessionID)
+        this.setState({ sessionID: sessionID })
       })
       .catch(this.onError)
   }
@@ -38,6 +38,7 @@ export default class App extends Component {
     errorIndicator: false,
     query: '',
     allGenres: null,
+    sessionID: null,
   }
 
   onError = () => {
@@ -63,7 +64,7 @@ export default class App extends Component {
   getRatedMovies = (page) => {
     this.setState({ loadingRated: true })
     this.moviesService
-      .getRated(page, localStorage.getItem('sessionID'))
+      .getRated(page, this.state.sessionID)
       .then((data) => {
         this.setState({
           ratedMovies: data.items,
@@ -76,7 +77,7 @@ export default class App extends Component {
   }
 
   setRate = (rate, filmID) => {
-    this.moviesService.postRate(rate, filmID, localStorage.getItem('sessionID')).catch(this.onError)
+    this.moviesService.postRate(rate, filmID, this.state.sessionID).catch(this.onError)
   }
 
   render() {

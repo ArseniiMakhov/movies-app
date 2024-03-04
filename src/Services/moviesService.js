@@ -1,17 +1,10 @@
 export default class moviesService {
-  _APIKey = 'Bearer 81e8e445d64588a7d995b8ce95ec23dd'
+  _APIKey = '81e8e445d64588a7d995b8ce95ec23dd'
   _APIToken =
     'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4MWU4ZTQ0NWQ2NDU4OGE3ZDk5NWI4Y2U5NWVjMjNkZCIsInN1YiI6IjY1YWJmNTE2NTk0Yzk0MDExMzhhZDE1NCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.Pj49ffaIjIoxmj16w3s1rYDXi1hNSZX6RRPC9pIwrA0'
 
   options = {
     get: {
-      method: 'GET',
-      headers: {
-        accept: 'application/json',
-        Authorization: this._APIToken,
-      },
-    },
-    guestGet: {
       method: 'GET',
       headers: {
         accept: 'application/json',
@@ -40,7 +33,7 @@ export default class moviesService {
 
   getQueryMovies = async (page = 1, query = '') => {
     const res = await this.getResource(
-      `https://api.themoviedb.org/3/search/movie?query=${query}&include_adult=false&language=en-US&page=${page}`,
+      `https://api.themoviedb.org/3/search/movie?api_key=${this._APIKey}&query=${query}&include_adult=false&language=en-US&page=${page}`,
       this.options.get
     )
     const items = res.results.map(this.transformData)
@@ -51,7 +44,7 @@ export default class moviesService {
   getRated = async (page = 1, sessionID) => {
     const res = await this.getResource(
       `https://api.themoviedb.org/3/guest_session/${sessionID}/rated/movies?api_key=${this._APIKey}&language=en-US&page=${page}&sort_by=created_at.asc`,
-      this.options.guestGet
+      this.options.get
     )
     const items = res.results.map(this.transformData)
     const total = res.total_pages * 20
@@ -59,21 +52,24 @@ export default class moviesService {
   }
 
   async getGenres() {
-    const res = await this.getResource('https://api.themoviedb.org/3/genre/movie/list?language=en', this.options.get)
+    const res = await this.getResource(
+      `https://api.themoviedb.org/3/genre/movie/list?api_key=${this._APIKey}&language=en`,
+      this.options.get
+    )
     return res.genres
   }
 
   async createGuestSession() {
     const res = await this.getResource(
       `https://api.themoviedb.org/3/authentication/guest_session/new?api_key=${this._APIKey}`,
-      this.options.guestGet
+      this.options.get
     )
     return res.guest_session_id
   }
 
   postRate = async (rate, filmID, sessionID) => {
     const res = await this.getResource(
-      `https://api.themoviedb.org/3/movie/${filmID}/rating?guest_session_id=${sessionID}&api_key=${this._APIKey}`,
+      `https://api.themoviedb.org/3/movie/${filmID}/rating?api_key=${this._APIKey}&guest_session_id=${sessionID}`,
       this.options.post(rate)
     )
     return res
