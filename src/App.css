@@ -24,25 +24,41 @@ body {
   border-radius: 0;
 }
 
+.ant-card-body {
+  width: 100%;
+  max-width: 481px;
+  padding: 15px !important;
+}
+
 .card-title {
-  font-size: 18px;
-  max-width: 80%;
+  font-size: 16px;
+  max-width: 85%;
   overflow: hidden;
+  margin-bottom: 5px;
+}
+
+.ant-card-cover .card-img {
+  width: 185px;
+  height: 280px;
+  background-color: #000;
 }
 
 .card-rating {
   position: absolute;
-  top: 18px;
-  right: 24px;
-  width: 35px;
-  height: 35px;
-  line-height: 30px;
+  top: 10px;
+  right: 10px;
+  width: 30px;
+  height: 30px;
+  line-height: 26px;
   text-align: center;
   border-radius: 50%;
+  font-size: 14px;
 }
 
 .card-date {
   margin-bottom: 7px;
+  font-size: 14px;
+  color: #000000A6;
 }
 
 .card-genres {
@@ -66,6 +82,7 @@ body {
 }
 
 .card-stars {
+  display: block;
   position: absolute;
   bottom: 24px;
 }
@@ -78,4 +95,58 @@ body {
   text-align: center;
   width: 50%;
   margin: 20px auto;
+}
+
+
+@media (max-width: 1200px)  {
+  .item-card {
+    height: 245px;
+  }
+
+  .card-stars {
+    bottom: 10px;
+    right: 10px;
+  }
+
+  .card-header {
+    padding-left: 70px;
+  }
+
+  .card-description {
+    display: block;
+    width: 100%;
+    position: relative;
+    margin-bottom: 5px;
+  }
+  .ant-card-body {
+    max-width: 100%;
+    padding: 10px !important;
+  }
+
+  .ant-card-cover .card-img {
+    width: 60px;
+    height: 90px;
+    border-radius: 0 !important;
+    position: absolute;
+  }
+}
+
+@media (max-width: 750px) {
+  .card-title {
+    max-width: 70%;
+  }
+
+  .card-stars svg {
+    width: 0.7em;
+  }
+}
+
+@media (max-width: 575px) {
+  .card-title {
+    max-width: 80%;
+  }
+
+  .card-stars svg {
+    width: .8em;
+  }
 }

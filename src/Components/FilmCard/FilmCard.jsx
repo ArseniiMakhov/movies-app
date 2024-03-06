@@ -11,7 +11,7 @@ export default class FilmCard extends Component {
   render() {
     const { item, setRate } = this.props
 
-    function shorten(str, maxLen = 250, separator = ' ') {
+    function shorten(str, maxLen, separator = ' ') {
       if (str.length <= maxLen) return str
       return str.substr(0, str.lastIndexOf(separator, maxLen)) + '...'
     }
@@ -53,7 +53,7 @@ export default class FilmCard extends Component {
               bordered={false}
               cover={
                 <img
-                  style={{ width: 185, height: 280, backgroundColor: 'black' }}
+                  className="card-img"
                   src={
                     item.poster
                       ? `https://image.tmdb.org/t/p/original${item.poster}`
@@ -64,25 +64,29 @@ export default class FilmCard extends Component {
             >
               <Meta
                 title={
-                  <div className="card-title-box">
-                    <h2 className="card-title">{item.title}</h2>
-                    <span className="card-rating" style={{ border: borderStyle(item.average) }}>
-                      {item.average ? item.average.toFixed(1) : 0}
-                    </span>
+                  <div className="card-header">
+                    <div className="card-title-box">
+                      <h2 className="card-title">{item.title}</h2>
+                      <span className="card-rating" style={{ border: borderStyle(item.average) }}>
+                        {item.average ? item.average.toFixed(1) : 0}
+                      </span>
+                    </div>
+                    <div className="card-title-info">
+                      {item.release ? (
+                        <p className="card-date">{format(new Date(item.release), 'MMM dd, yyyy')}</p>
+                      ) : (
+                        <p className="card-date">---</p>
+                      )}
+                      <Flex className="card-genres" gap="small" wrap="wrap">
+                        {genresFilter(allGenres, item.genres)}
+                      </Flex>
+                    </div>
                   </div>
                 }
                 description={
                   <>
-                    {item.release ? (
-                      <p className="card-date">{format(new Date(item.release), 'MMM dd, yyyy')}</p>
-                    ) : (
-                      <p className="card-date">---</p>
-                    )}
-                    <Flex className="card-genres" gap="small" wrap="wrap">
-                      {genresFilter(allGenres, item.genres)}
-                    </Flex>
                     {item.overview ? (
-                      <p className="card-description">{shorten(item.overview)}</p>
+                      <p className="card-description">{shorten(item.overview, 120)}</p>
                     ) : (
                       <p className="card-description">There&apos;s no description.</p>
                     )}

@@ -20,7 +20,8 @@ export default class RatedPage extends Component {
         className="movies-list"
         grid={{
           gutter: 36,
-          column: 2,
+          xs: 1,
+          sm: 2,
         }}
         dataSource={movies}
         loading={loading}
