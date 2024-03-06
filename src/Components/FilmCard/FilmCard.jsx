@@ -75,15 +75,15 @@ export default class FilmCard extends Component {
                       {item.release ? (
                         <p className="card-date">{format(new Date(item.release), 'MMM dd, yyyy')}</p>
                       ) : (
-                        <p className="card-date">---</p>
+                        <p className="card-nothing">---</p>
                       )}
-                      <Flex className="card-genres" gap="small" wrap="wrap">
-                        {item.genres ? (
-                          genresFilter(allGenres, item.genres)
-                        ) : (
-                          <Button className="genres-item">---</Button>
-                        )}
-                      </Flex>
+                      {item.genres.length !== 0 ? (
+                        <Flex className="card-genres" gap="small" wrap="wrap">
+                          {genresFilter(allGenres, item.genres)}
+                        </Flex>
+                      ) : (
+                        <p className="card-nothing">---</p>
+                      )}
                     </div>
                   </div>
                 }

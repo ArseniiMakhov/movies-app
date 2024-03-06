@@ -26,6 +26,7 @@ export default class FilmList extends Component {
           gutter: 36,
           xs: 1,
           sm: 2,
+          column: 2,
         }}
         dataSource={movies}
         loading={loading}

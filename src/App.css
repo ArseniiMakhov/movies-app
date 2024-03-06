@@ -12,6 +12,7 @@ body {
 
 .movies-list {
   padding: 36px;
+  width: 100%;
 }
 
 .movies-item {
@@ -55,7 +56,7 @@ body {
   font-size: 14px;
 }
 
-.card-date {
+.card-date, .card-nothing {
   margin-bottom: 7px;
   font-size: 14px;
   color: #000000A6;
