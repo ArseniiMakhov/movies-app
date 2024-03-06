@@ -78,7 +78,11 @@ export default class FilmCard extends Component {
                         <p className="card-date">---</p>
                       )}
                       <Flex className="card-genres" gap="small" wrap="wrap">
-                        {genresFilter(allGenres, item.genres)}
+                        {item.genres ? (
+                          genresFilter(allGenres, item.genres)
+                        ) : (
+                          <Button className="genres-item">---</Button>
+                        )}
                       </Flex>
                     </div>
                   </div>
